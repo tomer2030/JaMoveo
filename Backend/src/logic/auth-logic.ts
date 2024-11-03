@@ -20,8 +20,8 @@ async function addNewUser(user: UserModel): Promise<string>{
     // Hash the password before send it to DB
     user.password = authService.hash(user.password);
 
-    // Define the new user as player
-    user.roleId = RoleModel.Player;
+    // Define the new user as player if he not have role
+    if(!user.roleId) user.roleId = RoleModel.Player;
 
     // Make an array for all the values that will sent to the DB
     const values = [user.username, user.password, user.instrumentId, user.roleId];
